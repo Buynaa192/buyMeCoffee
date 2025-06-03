@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "BankCard" ALTER COLUMN "CVC" SET DATA TYPE TEXT;
