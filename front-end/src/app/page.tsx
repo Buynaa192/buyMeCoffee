@@ -66,39 +66,40 @@ export default function Home() {
           </Link>
         </div>
       </div>
-
-      <div className="w-80 absolute right-24 top-[90px] bg-white shadow-md rounded-md max-h-96 overflow-auto z-50 border border-gray-300">
-        {filteredUsers.length === 0 ? (
-          <p className="p-4 text-gray-500">No creators found.</p>
-        ) : (
-          filteredUsers.map((item, index) => (
-            <div
-              className="h-20 flex justify-between items-center border-b last:border-b-0 px-4"
-              key={index}
-            >
-              <div className="flex gap-2 items-center overflow-hidden">
-                <img
-                  className="w-10 h-10 rounded-full object-cover"
-                  src={item.profile.avatarImage}
-                  alt={`${item.username} avatar`}
-                />
-                <div className="truncate">
-                  <p className="font-semibold truncate">{item.username}</p>
-                  <p className="text-sm text-gray-600 truncate">
-                    {item.profile.about}
-                  </p>
+      {username.trim() && (
+        <div className="min-w-80 absolute right-24 top-[90px] bg-white shadow-md rounded-md max-h-96 overflow-auto z-50 border border-gray-300">
+          {filteredUsers.length === 0 ? (
+            <p className="p-4 text-gray-500">No creators found.</p>
+          ) : (
+            filteredUsers.map((item, index) => (
+              <div
+                className="h-20 flex justify-between items-center border-b last:border-b-0 px-4"
+                key={index}
+              >
+                <div className="flex gap-2 items-center overflow-hidden">
+                  <img
+                    className="w-10 h-10 rounded-full object-cover"
+                    src={item.profile.avatarImage}
+                    alt={`${item.username} avatar`}
+                  />
+                  <div className="truncate">
+                    <p className="font-semibold truncate">{item.username}</p>
+                    <p className="text-sm text-gray-600 truncate">
+                      {item.profile.about}
+                    </p>
+                  </div>
                 </div>
+                <Link href={`/supporter/${item.username}`}>
+                  <button className="flex items-center justify-center p-2.5 gap-2 rounded-md bg-[#F4F4F5]">
+                    <p>View profile</p>
+                    <ExternalLink />
+                  </button>
+                </Link>
               </div>
-              <Link href={`/supporter/${item.username}`}>
-                <button className="flex items-center justify-center p-2.5 gap-2 rounded-md bg-[#F4F4F5]">
-                  <p>View profile</p>
-                  <ExternalLink />
-                </button>
-              </Link>
-            </div>
-          ))
-        )}
-      </div>
+            ))
+          )}
+        </div>
+      )}
 
       <div className="w-full h-fit flex flex-col gap-9 items-center mt-30">
         <div className="w-fit h-fit flex gap-3">
