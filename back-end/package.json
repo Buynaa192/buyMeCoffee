@@ -6,7 +6,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.ts",
     "migrate": "prisma migrate dev",
-    "setup": "prisma generate"
+    "setup": "prisma generate",
+    "login": "vercel login",
+    "deploy": "vercel --prod"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +22,8 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.15.0"
+    "mongoose": "^8.15.0",
+    "vercel": "^42.3.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.18",
