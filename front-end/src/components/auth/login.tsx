@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useAuth } from "../userProvider";
 import { api } from "@/axios";
 import { useRouter } from "next/navigation";
+import { AxiosError } from "axios";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -37,14 +38,12 @@ export const Login = () => {
       console.log(user.profile);
       setUser(user);
       router.push(user.profile === null ? "/createprofile" : `/home`);
-    } catch (error: any) {
+    } catch (err) {
+      const error = err as AxiosError<{ message: string }>;
+
       console.error("Login error:", error);
-      // user.profile === null ? `/home` :
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
+
+      if (error.response?.data?.message) {
         setError(error.response.data.message);
       } else {
         setError("Нэвтрэх үед алдаа гарлаа");

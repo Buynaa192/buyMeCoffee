@@ -15,8 +15,8 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/components/userProvider";
-import { api } from "@/axios"; // 👈 API client байх ёстой
+
+import { api } from "@/axios";
 import { toast } from "sonner";
 
 const passwordSchema = z
@@ -34,8 +34,6 @@ const passwordSchema = z
 type PasswordForm = z.infer<typeof passwordSchema>;
 
 export const PasswordSettings = () => {
-  const { user, setUser } = useAuth();
-
   const form = useForm<PasswordForm>({
     resolver: zodResolver(passwordSchema),
     defaultValues: {

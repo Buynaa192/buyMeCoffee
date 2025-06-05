@@ -52,7 +52,7 @@ export default function Me() {
     if (!tempImageUrl) return;
 
     try {
-      const res = await api.put("/profile/put", {
+      await api.put("/profile/put", {
         backgroundImage: tempImageUrl,
       });
 

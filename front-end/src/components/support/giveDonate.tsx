@@ -2,7 +2,7 @@ import { CupLogo } from "@/assets/cupLogo";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useAuth } from "../userProvider";
 import { api } from "@/axios";
 type ProfileType = {
@@ -15,12 +15,22 @@ type ProfileType = {
     name: string;
     socialMediaUrl: string;
   };
-  username: string;
   receivedDonations: {
     amount: number;
     specialMessage: string;
-    sender: any;
+    sender: {
+      email: string;
+      profile: {
+        about: string;
+        avatarImage: string;
+        backgroundImage: string;
+        name: string;
+        socialMediaUrl: string;
+      };
+    };
   }[];
+
+  username: string;
 };
 type propsType = {
   props: ProfileType | undefined;
@@ -34,27 +44,32 @@ export const GiveDonate = ({ props, setProfile }: propsType) => {
   const { user } = useAuth();
   const postDonate = async () => {
     try {
-      const response = await api.post(`/donation/post`, {
+      await api.post(`/donation/post`, {
         amount: sellect,
         recipientId: props?.id,
         specialMessage,
         senderId: user ? user?.id : 57,
       });
-      console.log(response.data);
 
       setProfile((prev) => {
-        if (!prev) return prev;
+        if (!prev || !user || !user.profile) return prev;
+
+        const newDonation = {
+          amount: sellect,
+          specialMessage,
+          sender: {
+            id: user.id,
+            email: user.email,
+            username: user.username,
+            createdAt: "",
+            updatedAt: "",
+            profile: user.profile,
+          },
+        };
 
         return {
           ...prev,
-          receivedDonations: [
-            ...(prev.receivedDonations ?? []),
-            {
-              amount: sellect,
-              specialMessage,
-              sender: user?.id,
-            },
-          ],
+          receivedDonations: [...prev.receivedDonations, newDonation],
         };
       });
     } catch (error) {
@@ -66,7 +81,7 @@ export const GiveDonate = ({ props, setProfile }: propsType) => {
     <div className="w-[628px] h-[509px] border border-[#E4E4E7] rounded-lg p-6 flex flex-col gap-8 bg-white">
       <div className="w-full h-[122px] rounded-lg flex flex-col justify-between">
         <p className="font-bold text-[24px]">
-          Buy "{props?.profile?.name}" a Coffee
+          Buy {props?.profile?.name} a Coffee
         </p>
         <div className="h-16 w-full">
           <p>Select amount:</p>

@@ -1,5 +1,5 @@
 import { Header } from "@/components/header";
-import { LayOutCard } from "@/components/layout/layoutYellowCard";
+
 import { PropsWithChildren } from "react";
 
 export default function CustomerLayout({ children }: PropsWithChildren) {

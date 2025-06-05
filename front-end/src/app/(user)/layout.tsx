@@ -1,6 +1,6 @@
 import { Header } from "@/components/header";
 import { LayOutUser } from "@/components/layout/layoutUserHome";
-import { LayOutCard } from "@/components/layout/layoutYellowCard";
+
 import { PropsWithChildren } from "react";
 
 export default function UserLayout({ children }: PropsWithChildren) {

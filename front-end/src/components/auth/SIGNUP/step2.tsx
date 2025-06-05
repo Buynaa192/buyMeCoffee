@@ -3,17 +3,18 @@ import { StepType } from "@/app/(auth)/signup/page";
 import { api } from "@/axios";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/userProvider";
+import { AxiosError } from "axios";
 import { XCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import { useState } from "react";
 
-export const Step2 = ({ values, setValues, step, setStep }: StepType) => {
+export const Step2 = ({ values, setValues }: StepType) => {
   const [emailError, setEmailError] = useState("");
   const [passError, setPassError] = useState("");
   const [box, setBox] = useState(false);
   const Router = useRouter();
-  const { setUser, user } = useAuth();
+  const { setUser } = useAuth();
   const isValidEmail = (email: string) => {
     const emailRegex =
       /[a-zA-Z]+[(a-zA-Z0-9-\\_\\.!\\D)]*[(a-zA-Z0-9)]+@[(a-zA-Z)]+\.[(a-zA-Z)]{2,3}/;
@@ -29,9 +30,13 @@ export const Step2 = ({ values, setValues, step, setStep }: StepType) => {
 
       localStorage.setItem("token", data.token);
       setUser(data.user);
-      Router.push;
-    } catch (error: any) {
-      setEmailError(error.response.data.message);
+      console.log("dataa", data);
+
+      Router.push("/createprofile");
+    } catch (error) {
+      const err = error as AxiosError<{ message: string }>;
+      const message = err.response?.data?.message || "Signup failed";
+      setEmailError(message);
     }
   };
 
@@ -59,7 +64,7 @@ export const Step2 = ({ values, setValues, step, setStep }: StepType) => {
       return;
     }
     addUser();
-    Router.push("/createprofile");
+
     setEmailError("");
     setPassError("");
   };
@@ -103,7 +108,9 @@ export const Step2 = ({ values, setValues, step, setStep }: StepType) => {
           className="w-full h-10 border-1 border-[#E4E4E7] rounded-md"
         ></input>
         <input onChange={() => setBox((prev) => !prev)} type="checkbox"></input>
-        {passError && <div className="text-[12px]">{passError}</div>}
+        {passError && (
+          <div className="text-[12px] text-red-500">{passError}</div>
+        )}
       </div>
 
       <div className=" w-full h-16 flex justify-center ">

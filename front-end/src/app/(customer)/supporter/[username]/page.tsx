@@ -1,10 +1,8 @@
 "use client";
-import { WhiteCamera } from "@/assets/whiteCamera";
-import { BuyCoffee } from "@/components/me/buycoffee";
-import { ProfileEdit } from "@/components/me/profileEdit";
+
 import { GiveDonate } from "@/components/support/giveDonate";
 import { UserProfile } from "@/components/support/userProfile";
-import { Hearth } from "@/assets/hearth";
+
 import { api } from "@/axios";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -24,7 +22,16 @@ type ProfileType = {
   receivedDonations: {
     amount: number;
     specialMessage: string;
-    sender: any;
+    sender: {
+      email: string;
+      profile: {
+        about: string;
+        avatarImage: string;
+        backgroundImage: string;
+        name: string;
+        socialMediaUrl: string;
+      };
+    };
   }[];
 
   username: string;

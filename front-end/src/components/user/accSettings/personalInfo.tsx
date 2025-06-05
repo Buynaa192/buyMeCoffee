@@ -34,7 +34,6 @@ type FormValues = z.infer<typeof formSchema>;
 export const PersonalInfo = () => {
   const { user, setUser } = useAuth();
 
-  // preview-г эхлээд хэрэглэгчийн зурагтай тохируулна
   const [preview, setPreview] = useState<string | null>(null);
 
   const form = useForm<FormValues>({
@@ -60,14 +59,13 @@ export const PersonalInfo = () => {
         `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
         formData
       );
-      return res.data.secure_url; // Амжилттай upload болсны дараах зурагны URL
+      return res.data.secure_url;
     } catch (error) {
       console.error("Cloudinary upload failed:", error);
       throw error;
     }
   }
 
-  // user ирсэн даруй preview-г шинэчилнэ
   useEffect(() => {
     if (user?.profile?.avatarImage) {
       setPreview(user.profile.avatarImage);
@@ -84,6 +82,7 @@ export const PersonalInfo = () => {
       form.setValue("avatarImage", imageUrl, { shouldValidate: true });
     } catch (err) {
       alert("Failed to upload image");
+      console.error(err);
     }
   };
 

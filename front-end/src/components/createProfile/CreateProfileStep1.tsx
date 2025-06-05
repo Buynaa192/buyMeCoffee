@@ -119,6 +119,9 @@ export const CreateProfileStep1 = ({ step, setStep }: stepType) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Add photo</FormLabel>
+
+              <input type="hidden" {...field} />
+
               <div className="relative w-40 h-40 border-dashed border-2 rounded-full flex items-center justify-center overflow-hidden">
                 {imagePreview ? (
                   <Image
@@ -138,6 +141,7 @@ export const CreateProfileStep1 = ({ step, setStep }: stepType) => {
                   onChange={handleImageChange}
                 />
               </div>
+
               <FormMessage className="text-red-500" />
             </FormItem>
           )}

@@ -1,5 +1,5 @@
 "use client";
-import { api } from "@/axios";
+
 import { SignUp } from "@/components/auth/SIGNUP/signUp";
 import { Step2 } from "@/components/auth/SIGNUP/step2";
 import Link from "next/link";

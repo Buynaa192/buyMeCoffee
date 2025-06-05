@@ -141,7 +141,7 @@ export const ProfileEdit = () => {
               <DialogTitle>
                 <p className="text-xl font-semibold">Edit profile</p>
                 <p className="text-sm text-gray-500 font-light mt-1">
-                  Make changes to your profile here. Click save when you're
+                  Make changes to your profile here. Click save when you re
                   done.
                 </p>
               </DialogTitle>
@@ -157,6 +157,10 @@ export const ProfileEdit = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Add photo</FormLabel>
+
+                      {/* Hidden input to track uploaded URL */}
+                      <input type="hidden" {...field} />
+
                       <div className="relative w-40 h-40 border-2 border-dashed rounded-full flex items-center justify-center overflow-hidden cursor-pointer">
                         {imagePreview ? (
                           <Image

@@ -1,6 +1,6 @@
 "use client";
 
-import { donationType, useAuth } from "../userProvider";
+import { donationType } from "../userProvider";
 type donation = {
   donation: donationType;
 };
@@ -28,7 +28,6 @@ function getTimeAgo(dateStr: string | Date): string {
 }
 
 export const CommentCard = ({ donation }: donation) => {
-  const { user } = useAuth();
   return (
     <div className="w-full p-3">
       <div className=" w-full flex-col flex gap-4">
