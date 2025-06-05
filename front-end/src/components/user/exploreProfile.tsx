@@ -1,3 +1,4 @@
+"use client";
 import { usersType } from "@/app/(user)/explore/page";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
@@ -28,11 +29,11 @@ export const ExploreProfile = ({ item }: itemType) => {
         <div className="grid grid-cols-2 h-[calc(100%-40px)] gap-5 overflow-hidden">
           <div className=" flex flex-col gap-2 overflow-scroll">
             <p className="font-bold">About {item.username}</p>
-            <p className="text-[14px]">{item.profile.about}</p>
+            <p className="text-[14px]">{item.profile?.about}</p>
           </div>
           <div className=" flex flex-col gap-2">
             <p className="font-bold">Social media URL</p>
-            <p className="text-[14px]">{item.profile.socialMediaUrl}</p>
+            <p className="text-[14px]">{item.profile?.socialMediaUrl}</p>
           </div>
         </div>
       </div>
