@@ -13,7 +13,7 @@ export const ExploreProfile = ({ item }: itemType) => {
             <div className="w-10 h-10 rounded-full ">
               <img
                 className="w-full h-full rounded-full"
-                src={item.profile.avatarImage}
+                src={item.profile?.avatarImage}
               ></img>
             </div>
             <p className="font-bold text-[20px]">{item.username}</p>
